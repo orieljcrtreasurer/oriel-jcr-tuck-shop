@@ -300,12 +300,200 @@ async function saveHours() {
   }
 }
 
+
+const IMAGE_FOLDER = "images";
+
+function imageMessage(text) {
+  $("image-message").textContent = text;
+}
+
+// Convert an image file into Base64 for GitHub
+async function fileToBase64(file) {
+  const buffer = await file.arrayBuffer();
+  const bytes = new Uint8Array(buffer);
+
+  let binary = "";
+
+  // Process in chunks to avoid large argument lists
+  for (let i = 0; i < bytes.length; i += 8192) {
+    binary += String.fromCharCode(
+      ...bytes.subarray(i, i + 8192)
+    );
+  }
+
+  return btoa(binary);
+}
+
+// Restrict filenames to safe, simple names
+function validImageFilename(filename) {
+  return /^[a-zA-Z0-9._-]+\.(jpg|jpeg|png|webp|gif)$/i
+    .test(filename);
+}
+
+// Upload a selected image
+async function uploadImage() {
+  const file = $("image-file").files[0];
+  const filename = $("image-filename").value.trim();
+
+  if (!token) {
+    return imageMessage("Connect to GitHub first.");
+  }
+
+  if (!file) {
+    return imageMessage("Please select an image.");
+  }
+
+  if (!validImageFilename(filename)) {
+    return imageMessage(
+      "Use a filename such as monster-white.jpg"
+    );
+  }
+
+  const allowedTypes = {
+    "image/jpeg": ["jpg", "jpeg"],
+    "image/png": ["png"],
+    "image/webp": ["webp"],
+    "image/gif": ["gif"]
+  };
+
+  const extension = filename.split(".").pop().toLowerCase();
+
+  if (!allowedTypes[file.type]?.includes(extension)) {
+    return imageMessage(
+      "The filename extension must match the image type."
+    );
+  }
+
+  const path = `${IMAGE_FOLDER}/${filename}`;
+  const button = $("upload-image");
+
+  try {
+    button.disabled = true;
+    imageMessage("Uploading image...");
+
+    const content = await fileToBase64(file);
+
+    await github(path, "PUT", {
+      message: `Upload tuck shop image ${filename}`,
+      content,
+      branch: "main"
+    });
+
+    // Set the product image path automatically
+    $("image").value = path;
+
+    imageMessage(`Uploaded successfully: ${path}`);
+
+  } catch (error) {
+    imageMessage(
+      "Image upload failed: " + error.message
+    );
+  } finally {
+    button.disabled = false;
+  }
+}
+
+
+async function renameImage(oldPath, newFilename) {
+  if (!token) {
+    throw new Error("Connect to GitHub first.");
+  }
+
+  if (!validImageFilename(newFilename)) {
+    throw new Error("Invalid image filename.");
+  }
+
+  // Only rename files in our images folder
+  if (!/^images\/[a-zA-Z0-9._-]+\.(jpg|jpeg|png|webp|gif)$/i
+      .test(oldPath)) {
+    throw new Error("Invalid existing image path.");
+  }
+
+  const newPath = `images/${newFilename}`;
+
+  if (oldPath === newPath) {
+    return newPath;
+  }
+
+  // Get existing image
+  const oldFile = await github(oldPath);
+
+  // Create new image using existing content
+  await github(newPath, "PUT", {
+    message: `Rename image to ${newFilename}`,
+    content: oldFile.content.replace(/\s/g, ""),
+    branch: "main"
+  });
+
+  // Update every product that uses this image
+  const previousItems = JSON.parse(JSON.stringify(items));
+
+  items.forEach(item => {
+    if (item.image === oldPath) {
+      item.image = newPath;
+    }
+  });
+
+  try {
+    // Publish product references before deleting old image
+    itemSha = await publish("items.json", items, itemSha);
+  } catch (error) {
+    items = previousItems;
+    throw new Error(
+      "New image created, but product references could not " +
+      "be updated. Original image has not been deleted. " +
+      error.message
+    );
+  }
+
+  // Delete old image
+  await github(oldPath, "DELETE", {
+    message: `Remove old image ${oldPath}`,
+    sha: oldFile.sha,
+    branch: "main"
+  });
+
+  renderItems();
+  return newPath;
+}
+
+
 $("connect").onclick = connect;
 $("disconnect").onclick = disconnect;
 $("item-form").onsubmit = saveProduct;
 $("clear-item").onclick = clearItem;
 $("save-items").onclick = saveItems;
 $("save-hours").onclick = saveHours;
+$("upload-image").onclick = uploadImage;
+$("image-file").addEventListener("change", () => {
+  const file = $("image-file").files[0];
+
+  if (file) {
+    $("image-filename").value = file.name
+      .toLowerCase()
+      .replace(/[^a-z0-9._-]/g, "-");
+  }
+});
+$("rename-image").onclick = async () => {
+  const oldPath = $("image").value.trim();
+  const newFilename = $("image-filename").value.trim();
+
+  try {
+    imageMessage("Renaming image...");
+
+    const newPath = await renameImage(
+      oldPath,
+      newFilename
+    );
+
+    $("image").value = newPath;
+    imageMessage(`Image renamed to ${newPath}`);
+
+  } catch (error) {
+    imageMessage("Rename failed: " + error.message);
+  }
+};
+
 if (token){
     connect();
 }

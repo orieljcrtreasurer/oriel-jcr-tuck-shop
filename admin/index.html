@@ -73,7 +73,35 @@
         <input id="name" placeholder="Product name" required>
         <input id="price" type="number" min="0"
                step="0.01" placeholder="Price" required>
-        <input id="image" placeholder="images/example.jpg">
+        <div class="image-manager">
+            <label for="image">Product image path</label>
+            <input id="image" placeholder="images/example.jpg">
+
+            <div>
+                <label for="image-file">Choose an image</label>
+                <input
+                type="file"
+                id="image-file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                >
+            </div>
+
+            <div>
+                <label for="image-filename">Filename</label>
+                <input
+                id="image-filename"
+                placeholder="example.jpg"
+                >
+            </div>
+
+            <button type="button" id="upload-image">
+                Upload Image to GitHub
+            </button>
+
+            <button type="button" id="rename-image">Rename Existing Image</button>
+
+            <p id="image-message" role="status"></p>
+        </div>
         <label>
           <input id="available" type="checkbox" checked>
           Available
