@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Oriel JCR Tuck Shop Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 0 16px;
+      background: #f5f5f5;
+    }
+    section {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    input, select, button {
+      padding: 8px;
+      margin: 4px;
+      max-width: 100%;
+    }
+    button { cursor: pointer; }
+    .item {
+      padding: 12px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .item img {
+      width: 55px;
+      height: 55px;
+      object-fit: contain;
+      vertical-align: middle;
+    }
+    .item button { float: right; }
+    .day {
+      margin: 12px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .session { margin: 6px 0; }
+    .session input { width: 105px; }
+    #message { white-space: pre-wrap; }
+  </style>
+  <script src="admin.js" defer></script>
+</head>
+<body>
+
+  <h1>Oriel JCR Tuck Shop Admin</h1>
+
+  <section>
+    <h2>GitHub Connection</h2>
+    <p>Enter your GitHub personal access token.</p>
+    <input type="password" id="token"
+           placeholder="GitHub token"
+           autocomplete="off">
+    <button id="connect">Connect</button>
+    <button id="disconnect">Disconnect</button>
+    <p id="message" role="status"></p>
+  </section>
+
+  <div id="editor" hidden>
+    <section>
+      <h2>Products</h2>
+      <div id="items-list"></div>
+
+      <h3>Add / Edit Product</h3>
+      <form id="item-form">
+        <input id="name" placeholder="Product name" required>
+        <input id="price" type="number" min="0"
+               step="0.01" placeholder="Price" required>
+        <input id="image" placeholder="images/example.jpg">
+        <label>
+          <input id="available" type="checkbox" checked>
+          Available
+        </label>
+        <p>
+          <button type="submit">Save Product</button>
+          <button type="button" id="clear-item">Clear</button>
+        </p>
+      </form>
+
+      <button id="save-items">Publish Products to GitHub</button>
+    </section>
+
+    <section>
+      <h2>Opening Hours</h2>
+      <div id="hours-list"></div>
+      <button id="save-hours">Publish Hours to GitHub</button>
+    </section>
+  </div>
+
+</body>
+</html>
