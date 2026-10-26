@@ -7,7 +7,7 @@ const DAYS = [
   "friday", "saturday", "sunday"
 ];
 
-let token = "";
+let token = localStorage.getItem("github_token") || "";
 let items = [];
 let hours = {};
 let itemSha = "";
@@ -65,8 +65,15 @@ async function loadFile(path) {
 }
 
 async function connect() {
-  token = $("token").value.trim();
-  if (!token) return message("Please enter a token.");
+  const enteredToken = $("token").value.trim();
+
+  if (enteredToken) {
+    token = enteredToken;
+  }
+
+  if (!token) {
+    return message("Please enter a token.");
+  }
 
   try {
     message("Connecting...");
@@ -85,14 +92,19 @@ async function connect() {
     itemSha = products.sha;
     hoursSha = opening.sha;
 
+    // Remember token after successful connection
+    localStorage.setItem("github_token", token);
+
     $("token").value = "";
     $("editor").hidden = false;
 
     renderItems();
     renderHours();
-    message("Connected. Changes are not published until saved.");
+
+    message("Connected to GitHub.");
   } catch (error) {
     token = "";
+    localStorage.removeItem("github_token");
     $("editor").hidden = true;
     message(error.message);
   }
@@ -100,11 +112,17 @@ async function connect() {
 
 function disconnect() {
   token = "";
+
+  // Forget the saved token
+  localStorage.removeItem("github_token");
+
   items = [];
   hours = {};
+
   $("token").value = "";
   $("editor").hidden = true;
-  message("Disconnected.");
+
+  message("Disconnected. Saved token removed.");
 }
 
 function clearItem() {
@@ -122,7 +140,7 @@ function renderItems() {
     row.className = "item";
 
     const image = document.createElement("img");
-    image.src = item.image || "";
+    image.src = "../" + item.image || "";
     image.alt = "";
 
     const label = document.createElement("span");
@@ -288,3 +306,6 @@ $("item-form").onsubmit = saveProduct;
 $("clear-item").onclick = clearItem;
 $("save-items").onclick = saveItems;
 $("save-hours").onclick = saveHours;
+if (token){
+    connect();
+}
