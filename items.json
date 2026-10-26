@@ -13,25 +13,25 @@
   },
   {
     "name": "Coca Cola (330ml)",
-    "price": 1.0,
+    "price": 1,
     "image": "images/coca-cola.jpeg",
     "available": true
   },
   {
     "name": "San Pelligrino Aranciata (330ml)",
-    "price": 1.0,
+    "price": 1,
     "image": "images/san-pelligrino.jpeg",
     "available": true
   },
   {
     "name": "Tyrrells Cheddar & Chive Crisps (40g)",
-    "price": 1.0,
+    "price": 1,
     "image": "images/tyrrells-cheddar-and-chive.jpeg",
     "available": true
   },
   {
     "name": "Kettle Salt & Vinegar Crisps (40g)",
-    "price": 1.0,
+    "price": 1,
     "image": "images/kettle-salt-and-vinegar.jpeg",
     "available": true
   },
@@ -43,19 +43,19 @@
   },
   {
     "name": "Kit Kat (41.5g)",
-    "price": 1.0,
+    "price": 1,
     "image": "images/kit-kat.jpeg",
     "available": true
   },
   {
     "name": "Kinder Bueno (43g)",
-    "price": 1.0,
+    "price": 1,
     "image": "images/kinder-bueno.jpeg",
     "available": true
   },
   {
     "name": "Extra White Bubblegum (10pk)",
-    "price": 1.0,
+    "price": 1,
     "image": "images/extra-white-bubblegum.jpeg",
     "available": true
   },
