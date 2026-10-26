@@ -1,0 +1,385 @@
+
+/* ==============================
+   ORIEL JCR TUCK SHOP ADMIN
+   ============================== */
+
+:root {
+  --green: #243d35;
+  --green-hover: #355c4d;
+  --background: #f5f6f4;
+  --white: #ffffff;
+  --text: #242b27;
+  --muted: #6b756f;
+  --border: #e1e6e2;
+  --danger: #b53a3a;
+  --radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 30px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Main layout */
+
+body > h1,
+body > section,
+body > #editor {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body > h1 {
+  background: var(--green);
+  color: white;
+  padding: 28px;
+  border-radius: var(--radius);
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+
+#editor[hidden] {
+  display: none;
+}
+
+/* Sections */
+
+section {
+  background: var(--white);
+  padding: 25px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.035);
+}
+
+h2 {
+  margin: 0 0 20px;
+  font-size: 21px;
+  color: var(--green);
+}
+
+h3 {
+  margin: 20px 0 12px;
+  font-size: 16px;
+}
+
+p {
+  color: var(--muted);
+}
+
+/* Inputs */
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="time"],
+input:not([type]),
+select {
+  padding: 11px 12px;
+  border: 1px solid #cbd5ce;
+  border-radius: 6px;
+  font: inherit;
+  background: white;
+  color: var(--text);
+  max-width: 100%;
+  transition: border-color 0.15s;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid rgba(36, 61, 53, 0.15);
+  border-color: var(--green);
+}
+
+input[type="checkbox"] {
+  accent-color: var(--green);
+  width: 17px;
+  height: 17px;
+  vertical-align: middle;
+}
+
+input[type="file"] {
+  max-width: 100%;
+  padding: 10px;
+  background: var(--background);
+  border: 1px dashed #b8c7bd;
+  border-radius: 6px;
+}
+
+/* Buttons */
+
+button {
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+
+button:hover:not(:disabled) {
+  background: var(--green-hover);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Secondary buttons */
+
+#disconnect,
+#clear-item {
+  background: #e9eeea;
+  color: var(--green);
+}
+
+#disconnect:hover,
+#clear-item:hover {
+  background: #dbe5dd;
+}
+
+/* GitHub connection */
+
+#token {
+  width: min(100%, 400px);
+}
+
+#message {
+  margin-top: 15px;
+  font-size: 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Product list */
+
+#items-list {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  background: white;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item:nth-child(even) {
+  background: #fafbf9;
+}
+
+.item img {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: white;
+}
+
+.item span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+.item button {
+  flex-shrink: 0;
+  padding: 8px 12px;
+}
+
+.item button:last-child {
+  background: #fce8e8;
+  color: var(--danger);
+}
+
+.item button:last-child:hover {
+  background: #f7d2d2;
+}
+
+/* Product editor */
+
+#item-form {
+  background: #f9faf8;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+#item-form > input:not([type="checkbox"]) {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+#item-form > label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 8px 0;
+}
+
+/* Image uploader */
+
+.image-manager {
+  margin-top: 15px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+}
+
+.image-manager > label,
+.image-manager > div > label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.image-manager > input,
+.image-manager > div > input {
+  display: block;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.image-manager button {
+  margin: 4px 5px 4px 0;
+}
+
+#image-message {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+/* Publish buttons */
+
+#save-items,
+#save-hours {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+/* Opening hours */
+
+.day {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 12px;
+  background: #fafbf9;
+}
+
+.day h3 {
+  margin: 0 0 12px;
+  color: var(--green);
+}
+
+.session {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.session input {
+  width: 125px;
+}
+
+.session button {
+  background: #fce8e8;
+  color: var(--danger);
+}
+
+.session button:hover {
+  background: #f7d2d2;
+}
+
+.day > button {
+  background: #e9eeea;
+  color: var(--green);
+  margin-top: 5px;
+}
+
+.day > button:hover {
+  background: #dbe5dd;
+}
+
+/* Mobile layout */
+
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
+  body > h1 {
+    padding: 22px 18px;
+    font-size: 22px;
+  }
+
+  section {
+    padding: 16px;
+  }
+
+  .item {
+    flex-wrap: wrap;
+  }
+
+  .item span {
+    flex-basis: calc(100% - 75px);
+  }
+
+  .item button {
+    flex: 1;
+  }
+
+  #item-form {
+    padding: 14px;
+  }
+
+  .session {
+    gap: 6px;
+  }
+
+  .session input {
+    width: 110px;
+  }
+
+  #connect,
+  #disconnect {
+    margin-top: 8px;
+  }
+}
