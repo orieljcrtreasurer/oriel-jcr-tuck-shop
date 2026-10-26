@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Monster Ultra Energy (500ml)",
+    "price": 1.5,
+    "image": "images/white-monster.jpeg",
+    "available": true
+  },
+  {
+    "name": "Fentimans Ginger Beer (275ml)",
+    "price": 1.5,
+    "image": "images/fentimans-ginger-beer.jpeg",
+    "available": true
+  },
+  {
+    "name": "Coca Cola (330ml)",
+    "price": 1.0,
+    "image": "images/coca-cola.jpeg",
+    "available": true
+  },
+  {
+    "name": "San Pelligrino Aranciata (330ml)",
+    "price": 1.0,
+    "image": "images/san-pelligrino.jpeg",
+    "available": true
+  },
+  {
+    "name": "Tyrrells Cheddar & Chive Crisps (40g)",
+    "price": 1.0,
+    "image": "images/tyrrells-cheddar-and-chive.jpeg",
+    "available": true
+  },
+  {
+    "name": "Kettle Salt & Vinegar Crisps (40g)",
+    "price": 1.0,
+    "image": "images/kettle-salt-and-vinegar.jpeg",
+    "available": true
+  },
+  {
+    "name": "Doritos Cool Original (70g)",
+    "price": 1.5,
+    "image": "images/doritos-cool-original.jpeg",
+    "available": true
+  },
+  {
+    "name": "Kit Kat (41.5g)",
+    "price": 1.0,
+    "image": "images/kit-kat.jpeg",
+    "available": true
+  },
+  {
+    "name": "Kinder Bueno (43g)",
+    "price": 1.0,
+    "image": "images/kinder-bueno.jpeg",
+    "available": true
+  },
+  {
+    "name": "Extra White Bubblegum (10pk)",
+    "price": 1.0,
+    "image": "images/extra-white-bubblegum.jpeg",
+    "available": true
+  },
+  {
+    "name": "Maoam Stripe",
+    "price": 0.1,
+    "image": "images/maoam-stripes.jpeg",
+    "available": true
+  },
+  {
+    "name": "Tangfastics (140g)",
+    "price": 1.5,
+    "image": "images/tangfastics.jpeg",
+    "available": true
+  }
+]
