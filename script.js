@@ -1,4 +1,3 @@
-
 const DAYS = [
   "sunday", "monday", "tuesday", "wednesday",
   "thursday", "friday", "saturday"
@@ -88,57 +87,41 @@ function displayHours(hours) {
   status.className = `status ${isOpen ? "open" : "closed"}`;
 }
 
-// Display products
+// Display products without categories
 function displayItems(items) {
   const container = document.getElementById("products");
   container.replaceChildren();
 
-  // Group products by category
-  const categories = [...new Set(
-    items.map(item => item.category || "Other")
-  )];
+  items.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "product-card";
 
-  categories.forEach(category => {
-    const heading = document.createElement("h3");
-    heading.className = "category-heading";
-    heading.textContent = category;
-    container.appendChild(heading);
+    if (item.available === false) {
+      card.classList.add("unavailable");
+    }
 
-    const categoryItems = items.filter(
-      item => (item.category || "Other") === category
-    );
+    const image = document.createElement("img");
+    image.src = item.image;
+    image.alt = item.name;
+    image.loading = "lazy";
 
-    categoryItems.forEach(item => {
-      const card = document.createElement("div");
-      card.className = "product-card";
+    const name = document.createElement("h3");
+    name.textContent = item.name;
 
-      if (item.available === false) {
-        card.classList.add("unavailable");
-      }
+    const price = document.createElement("p");
+    price.className = "price";
+    price.textContent = `£${Number(item.price).toFixed(2)}`;
 
-      const image = document.createElement("img");
-      image.src = item.image;
-      image.alt = item.name;
-      image.loading = "lazy";
+    card.append(image, name, price);
 
-      const name = document.createElement("h3");
-      name.textContent = item.name;
+    if (item.available === false) {
+      const stock = document.createElement("p");
+      stock.className = "stock";
+      stock.textContent = "Out of stock";
+      card.appendChild(stock);
+    }
 
-      const price = document.createElement("p");
-      price.className = "price";
-      price.textContent = `£${Number(item.price).toFixed(2)}`;
-
-      card.append(image, name, price);
-
-      if (item.available === false) {
-        const stock = document.createElement("p");
-        stock.className = "stock";
-        stock.textContent = "Out of stock";
-        card.appendChild(stock);
-      }
-
-      container.appendChild(card);
-    });
+    container.appendChild(card);
   });
 }
 
