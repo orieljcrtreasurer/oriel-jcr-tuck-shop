@@ -98,6 +98,7 @@ h2 {
   padding: 12px;
   text-align: center;
   overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .product-card img {
@@ -125,6 +126,11 @@ h2 {
 .product-card .stock {
   font-size: 13px;
   color: #a33;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px rgba(139, 92, 246, 0.35);
 }
 
 @media (max-width: 500px) {
