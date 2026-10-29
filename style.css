@@ -151,6 +151,35 @@ h2 {
   box-shadow: 0 8px 12px rgba(139, 92, 246, 0.35);
 }
 
+/* Admin button */
+
+.admin-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+
+  transition: background 0.2s;
+}
+
+.admin-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Keep hidden elements hidden */
+.admin-button[hidden] {
+  display: none;
+}
+
 @media (max-width: 500px) {
   header {
     padding: 25px 15px;

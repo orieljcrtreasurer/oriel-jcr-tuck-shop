@@ -125,6 +125,11 @@ function displayItems(items) {
   });
 }
 
+// Show admin button if a GitHub token is saved
+if (localStorage.getItem("github_token")) {
+  document.getElementById("admin-button").hidden = false;
+}
+
 // Initialise website
 async function init() {
   try {
