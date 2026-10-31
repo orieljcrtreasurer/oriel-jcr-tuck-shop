@@ -69,6 +69,6 @@
     "name": "Tangfastics (140g)",
     "price": 1.25,
     "image": "images/tangfastics.jpeg",
-    "available": true
+    "available": false
   }
 ]
