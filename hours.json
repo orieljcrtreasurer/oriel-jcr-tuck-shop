@@ -1,39 +1,9 @@
 {
   "monday": [],
-  "tuesday": [
-    {
-      "open": "18:30",
-      "close": "18:50"
-    }
-  ],
-  "wednesday": [
-    {
-      "open": "18:30",
-      "close": "18:50"
-    }
-  ],
-  "thursday": [
-    {
-      "open": "19:30",
-      "close": "19:50"
-    }
-  ],
-  "friday": [
-    {
-      "open": "16:30",
-      "close": "16:50"
-    }
-  ],
-  "saturday": [
-    {
-      "open": "14:00",
-      "close": "15:00"
-    }
-  ],
-  "sunday": [
-    {
-      "open": "20:45",
-      "close": "21:45"
-    }
-  ]
+  "tuesday": [],
+  "wednesday": [],
+  "thursday": [],
+  "friday": [],
+  "saturday": [],
+  "sunday": []
 }
