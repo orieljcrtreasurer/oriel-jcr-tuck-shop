@@ -9,7 +9,7 @@
     "name": "Fentimans Ginger Beer (275ml)",
     "price": 1.5,
     "image": "images/fentimans-ginger-beer.jpeg",
-    "available": true
+    "available": false
   },
   {
     "name": "Coca Cola (330ml)",
